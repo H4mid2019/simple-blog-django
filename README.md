@@ -6,14 +6,15 @@ It's semi-CMS. I think It's useful for testers or Devlopers.
 
 just run appropriate commands and start your webserver:
 
-n linux :
-
+In linux :
+<code>
 python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py runserver
+</code>
 
 In windows:
-
+<code>
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
