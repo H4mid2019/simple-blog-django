@@ -1,0 +1,862 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Post Test</title>
+    <style>
+        /*
+font-family: 'Lexend Deca', sans-serif;
+font-family: 'Viga', sans-serif;
+font-family: 'Cutive Mono', monospace;
+*/
+        
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Lexend Deca', sans-serif;
+        }
+        
+        article {
+            margin-top: 6%;
+        }
+        
+        body {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased !important;
+            -moz-font-smoothing: antialiased !important;
+            text-rendering: optimizelegibility !important;
+            background-color: #f9f9f9;
+        }
+        /* Progress bar styles */
+        
+        progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            width: 100%;
+            height: 4px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: none;
+            background-color: transparent;
+            color: #d63031;
+        }
+        
+        progress::-webkit-progress-bar {
+            background-color: transparent;
+        }
+        
+        progress::-webkit-progress-value {
+            background-color: #d63031;
+        }
+        
+        progress::-moz-progress-bar {
+            background-color: #d63031;
+        }
+        
+        code {
+            font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif;
+            background-color: #eff0f1;
+            font-size: medium;
+            padding: 0px 8px;
+        }
+        /* END Progress bar styles */
+        
+        .masthead {
+            min-width: 700px;
+            width: 60%;
+            max-width: 960px;
+            height: 100px;
+            background-color: #f9f9f9;
+            border-bottom: 10px solid #cccccc;
+            margin: 0 12%;
+            margin-bottom: 40px;
+        }
+        
+        .masthead .logo {
+            background-image: url("");
+            height: 70px;
+            width: 200px;
+            position: relative;
+            top: 40px;
+            left: 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: inline-block;
+        }
+        
+        .wrapper {
+            width: 70%;
+            margin: 0 7% 0 12%;
+        }
+        
+        figure {
+            margin: 50px 0px;
+        }
+        
+        figure img {
+            max-width: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        /* IMG hover */
+        
+        img {
+            opacity: 1;
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+        
+        img:hover {
+            opacity: 0.7;
+        }
+        /* END hover */
+        
+        figure figcaption {
+            text-align: center;
+            color: #777777;
+            font-size: 14px;
+        }
+        
+        .article-meta {
+            font-size: 14px;
+            padding-left: 40px;
+        }
+        
+        .article-meta img {
+            width: 64px;
+            height: 64px;
+            border-radius: 100%;
+            border: 1px solid #d63031;
+            padding: 2px;
+            display: inline-block;
+        }
+        
+        .article-meta .meta-data {
+            display: inline-block;
+            padding-left: 12px;
+            padding-top: 16px;
+            vertical-align: top;
+        }
+        
+        .article-meta .meta-author {
+            color: #545454;
+        }
+        
+        .article-meta .meta-date {
+            color: #777777;
+        }
+        
+        .article-meta hr {
+            width: 140px;
+            margin-top: 20px;
+            border: none;
+            border-bottom: 1px solid #cccccc;
+        }
+        
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Viga', sans-serif;
+            font-weight: normal;
+            color: #333333;
+            line-height: 120%;
+            margin-top: 60px;
+            padding-left: 0px;
+        }
+        
+        h1 {
+            padding-left: 40px;
+            font-size: 36px;
+            margin: 10px 0px;
+        }
+        
+        h2 {
+            font-size: 28px;
+            margin-top: 40px;
+        }
+        
+        p {
+            padding-left: 0px;
+            color: #545454;
+            font-size: 21px;
+            line-height: 180%;
+        }
+        
+        ul,
+        ol {
+            color: #545454;
+            line-height: 180%;
+            font-size: 21px;
+            padding-left: 140px;
+        }
+        
+        ul li,
+        ol li {
+            margin: 12px 0px;
+        }
+        
+        .teaser {
+            line-height: 150%;
+            margin: 0px;
+            padding-left: 40px;
+        }
+        
+        a {
+            color: #545454;
+            text-decoration: none;
+        }
+        
+        a span:hover {
+            color: #000000;
+            box-shadow: inset 0 -10px #ffbe76;
+        }
+        
+        a span {
+            box-shadow: inset 0 -10px #f6e58d;
+        }
+        
+        blockquote {
+            color: #545454;
+            font-size: 21px;
+            line-height: 180%;
+            font-style: italic;
+            margin-left: 55px;
+            padding-left: 20px;
+            position: relative;
+            border-left: 5px solid #cccccc;
+        }
+        
+        blockquote cite {
+            display: none;
+        }
+        
+        .read-more {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .featured {
+            border-bottom: 2px solid #cccccc;
+            margin-bottom: 20px;
+        }
+        
+        .featured h1,
+        .featured h2,
+        .featured h3,
+        .featured h4,
+        .featured p,
+        .featured blockquote {
+            padding-left: 0;
+        }
+        
+        .featured figure {
+            margin-top: 20px;
+            margin-bottom: 0px;
+        }
+        
+        .block {
+            width: 100vh;
+            font-size: 0px;
+            margin: 20px 0px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #cccccc;
+        }
+        
+        .block figure {
+            margin: 0px;
+        }
+        
+        .block figcaption {
+            display: none;
+        }
+        
+        .block .photo {
+            display: inline-block;
+            width: 240px;
+            height: 135px;
+        }
+        
+        .block .text {
+            vertical-align: top;
+            display: inline-block;
+            width: 460px;
+        }
+        
+        .block .text h2 {
+            font-size: 24px;
+            margin: 0px 10px;
+        }
+        
+        .block p {
+            margin: 0px 10px;
+        }
+        
+        .full-width-btn {
+            border: 1px solid #d63031;
+            text-align: center;
+            color: #d63031;
+            background-color: #ffffff;
+            margin: 40px 0px;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        
+        .full-width-btn:hover {
+            background-color: #d63031;
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+        
+        .full-width-btn:hover a {
+            color: #ffffff;
+        }
+        
+        .full-width-btn a {
+            padding: 20px 0px;
+            color: #d63031;
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .prefooter {
+            font-size: 0px;
+            width: 100%;
+            margin: 0;
+            padding: 20px 0px 40px 0px;
+            margin-top: 60px;
+            background-color: #f0f0f0;
+        }
+        
+        .footer {
+            width: inherit;
+            background-color: #333333;
+            font-size: 0px;
+        }
+        
+        .footer .lower-footer {
+            padding: 40px 0px;
+            border-top: 1px solid #ffffff;
+        }
+        
+        .footer .upper-footer {
+            padding: 40px 0px;
+        }
+        
+        .footer p {
+            margin: 0;
+            padding: 0;
+            display: inline;
+            color: #ffffff;
+            line-height: 36px;
+            font-size: 28px;
+        }
+        
+        .footer .copyright {
+            float: right;
+            color: #cccccc;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        
+        .foot-block {
+            width: 50%;
+            display: inline-block;
+        }
+        
+        .foot-block div {
+            color: #f9f9f9;
+            font-size: 16px;
+            margin: 20px 0px;
+        }
+        
+        .foot-sit-left {
+            padding-right: 10px;
+        }
+        
+        .foot-sit-right {
+            padding-left: 10px;
+        }
+        
+        .foot-block h4 {
+            margin: 0;
+            padding: 0;
+            font-size: 21px;
+            line-height: 180%;
+            color: #ffffff;
+        }
+        
+        .foot-block p {
+            display: block;
+            font-size: 14px;
+            line-height: 140%;
+            color: #cccccc;
+        }
+        
+        .section-hl {
+            font-size: 21px;
+            padding: 20px 0px 0px 0px;
+            margin: 0;
+            margin-bottom: 10px;
+            color: #333333;
+            border-bottom: 1px solid #cccccc;
+            font-family: 'Viga', sans-serif;
+        }
+        
+        .prefooter .foot-block p {
+            color: #545454;
+            font-size: 16px;
+        }
+        
+        .prefooter .foot-block h4 {
+            color: #333333;
+        }
+        
+        .prefooter .foot-block p {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .prefooter .foot-block img {
+            width: 100%;
+            max-height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .prefooter .foot-block div {
+            padding: 0px 10px;
+        }
+        
+        .foot-block a {
+            text-decoration: underline;
+            color: #333333;
+            text-decoration-color: #d63031;
+            display: block;
+            padding-top: 10px;
+        }
+        
+        .meta-bio {
+            margin-top: 80px;
+        }
+        
+        .meta-bio .wrapper {
+            padding: 40px 0px;
+            border-top: 1px solid #cccccc;
+            border-bottom: 1px solid #cccccc;
+        }
+        
+        .meta-bio img {
+            display: inline-block;
+            width: 110px;
+            height: 110px;
+            border-radius: 100%;
+            padding: 2px;
+            border: 1px solid #d63031;
+        }
+        
+        .bio-text {
+            vertical-align: top;
+            display: inline-block;
+            padding-left: 20px;
+            width: calc(100% - 141px);
+        }
+        
+        .bio-text p {
+            font-size: 18px;
+            line-height: 140%;
+            color: #777777;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .bio-text .bio-shl {
+            font-size: 16px;
+            color: #d63031;
+            text-transform: uppercase;
+            font-family: 'Viga', sans-serif;
+        }
+        
+        .bio-text .bio-hl {
+            line-height: 120%;
+            font-size: 24px;
+            color: #333333;
+            font-family: 'Viga', sans-serif;
+        }
+        
+        @media only screen and (max-width: 720px) {
+            .wrapper,
+            .masthead {
+                width: 100%;
+            }
+            .masthead {
+                min-width: 0px;
+            }
+            img {
+                max-width: 100%;
+            }
+            h1,
+            h2,
+            h3,
+            h4,
+            p,
+            blockquote,
+            .article-meta,
+            .teaser,
+            .meta-bio,
+            .section-hl {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .teaser,
+            p,
+            blockquote,
+            ul {
+                font-size: 16px;
+            }
+            .prefooter .foot-block p,
+            .prefooter .foot-block h4 {
+                padding: 0px 20px;
+            }
+            .prefooter .foot-block img {
+                padding: 0px 20px;
+                width: calc(100% - 40px);
+                max-height: 320px;
+                background-size: cover;
+                background-position: center;
+            }
+            .prefooter .foot-block div {
+                padding: 0px;
+                padding-bottom: 20px;
+            }
+            .bio-text p {
+                font-size: 16px;
+            }
+            .bio-text .bio-shl {
+                font-size: 14px;
+            }
+            .bio-text .bio-hl {
+                font-size: 19px;
+            }
+            h1 {
+                font-size: 28px;
+            }
+            h2 {
+                font-size: 24px;
+            }
+            blockquote {
+                margin-left: 20px;
+            }
+            ul,
+            ol {
+                padding-left: 60px;
+                padding-right: 20px;
+            }
+            .hero-figure {
+                margin: 20px 0px 40px 0px;
+            }
+            .meta-bio img {
+                width: 90px;
+                height: 90px;
+            }
+            .featured h1 {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .foot-block {
+                display: block;
+                width: 100%;
+            }
+            .foot-sit-right,
+            .foot-sit-left {
+                padding: 0px 20px;
+            }
+            .lower-footer p {
+                padding: 0px 20px;
+            }
+            .block .text h1,
+            .block .text h2,
+            .block .text p {
+                margin: 0;
+                padding: 0;
+            }
+            .block .text h2,
+            .block .text p {
+                padding: 0px 10px;
+            }
+            .block .photo {
+                width: 36%;
+                padding-left: 20px;
+            }
+            .block .text {
+                width: calc(64% - 30px);
+                padding-right: 10px;
+            }
+            .full-width-btn {
+                margin: 40px 20px;
+            }
+        }
+        /* NAV Styles */
+        
+        #pattern {
+            color: #545454;
+            float: right;
+            width: 100%;
+            z-index: 999;
+            position: relative;
+            right: 0px;
+            top: -55px;
+        }
+        
+        a.menu-link {
+            margin-top: 10%;
+            display: inline-block;
+            line-height: 70px;
+        }
+        
+        nav[role=navigation] {
+            clear: both;
+            -webkit-transition: all 0.3s ease-out;
+            -moz-transition: all 0.3s ease-out;
+            -ms-transition: all 0.3s ease-out;
+            -o-transition: all 0.3s ease-out;
+            transition: all 0.3s ease-out;
+        }
+        
+        .js nav[role=navigation] {
+            overflow: hidden;
+            max-height: 0;
+        }
+        
+        nav[role=navigation].active {
+            max-height: 400px;
+            width: 100%;
+            z-index: 999;
+            background-color: #f9f9f9;
+            margin-top: 20px;
+        }
+        
+        nav[role=navigation] ul {
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav[role=navigation] li a {
+            display: block;
+            border-bottom: 1px solid #cccccc;
+            text-align: center;
+            padding: 10px 0px 20px 0px;
+        }
+        
+        nav[role=navigation] li a:hover {
+            color: #d63031;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <!-- BEGIN HEAD -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Lexend+Deca|Viga&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cutive+Mono|Roboto+Slab&display=swap" rel="stylesheet">
+
+    <!-- END HEAD -->
+
+
+    <!-- BEGIN MASTHEAD -->
+    <div class="masthead">
+        <!-- <a href="#">
+            <div class="logo"></div>
+        </a> -->
+        <div id="pattern" class="pattern">
+
+            <a href="#menu" class="menu-link">Menu
+      &nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <nav id="menu" role="navigation">
+                <ul>
+                    <li><a href="https://darabi.website/">Home</a></li>
+                    <li><a href="https://darabi.website/#open-modal">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- end .masthead -->
+    <!-- END MASTHEAD -->
+
+
+    <!-- BEGIN ARTICLE -->
+    <progress value="0"></progress>
+
+    <div class="wrapper">
+
+        <h1>{{ post.title }}</h1>
+
+        <p class="teaser">{{ post.subtitle }}</p>
+
+
+        <figure class="hero-figure">
+            <img src="{{ post.imag.url }}" />
+            <figcaption></figcaption>
+        </figure>
+
+        <div class="article-meta">
+            <img src="https://picsum.photos/200/200" alt="Author" />
+            <div class="meta-data">
+                <span class="meta-author">{{ post.author }}</span><br />
+                <span class="meta-date">{{ post.date_added }}</span>
+            </div>
+            <hr />
+        </div>
+
+        <article> {% autoescape off %} {{ post.article }}</p>{% endautoescape %}</article>
+
+
+    </div>
+
+    <div class="meta-bio">
+
+        <div class="wrapper">
+            <img src="https://picsum.photos/200/200" alt="" />
+            <div class="bio-text">
+                <p class="bio-shl">Author</p>
+                <p class="bio-hl">{{ post.author }}</p>
+                <p>Great at nothing. Pretty okay at a lot of things.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BEGIN FOOTER -->
+    <div class="prefooter">
+
+        <div class="wrapper">
+
+            <p class="section-hl">More Reading ...</p>
+            {% for p in posts|slice:":4" %}
+            <!-- comment -->
+            <div class="foot-block">
+                <div>
+                    <img src="{{ p.imag }}" alt="" />
+                    <h4>{{ p.title }}</h4>
+                    <p>{{ p.brief }}</p>
+                    <p><a href="{% url 'blog:detail' p.slug %}">Continue reading...</a></p>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- end .foot-block -->
+
+            <!-- 
+            <div class="foot-block">
+                <div>
+                    <img src="https://picsum.photos/1380/960" alt="" />
+                    <h4>Headline</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p><a href="#">Continue reading...</a></p>
+                </div>
+            </div>
+           
+            <div class="foot-block">
+                <div>
+                    <img src="https://picsum.photos/800/620" alt="" />
+                    <h4>Headline</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p><a href="#">Continue reading...</a></p>
+                </div>
+            </div>            
+
+            <div class="foot-block">
+                <div>
+                    <img src="https://picsum.photos/460/280" alt="" />
+                    <h4>Headline</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p><a href="#">Continue reading...</a></p>
+                </div>
+            </div> -->
+            <!-- end .foot-block -->
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        <div class="wrapper">
+
+            <div class="upper-footer">
+
+                <div class="foot-block">
+                    <div class="foot-sit-left">
+                        <h4>Disclaimer</h4>
+                        <p>I'm not responsible for usage of this content, It has educational purposes and you must to test it before the run,I'm not responsible for any kind of damage or any distortion or loses.</p>
+                    </div>
+                </div>
+                <!-- end .foot-block -->
+
+                <div class="foot-block">
+                    <div class="foot-sit-right">
+                        <h4>Note</h4>
+                        <p>Please make a backup before doing anything</p>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+                <!-- end .foot-block -->
+
+            </div>
+            <!-- end .upper-footer -->
+
+            <div class="lower-footer">
+                <p>HamidReza Darabi</p>
+                <p class="copyright">2019 &copy; Darabi</p>
+            </div>
+            <!-- end .lower-footer -->
+
+        </div>
+        <!-- end .wrapper -->
+    </div>
+    <!-- end .footer -->
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- END FOOTER -->
+    <!-- partial -->
+    <script>
+        $(document).on('ready', function() {
+            $('body').addClass('js');
+            var $menu = $('#menu'),
+                $menulink = $('.menu-link');
+
+            $menulink.click(function() {
+                $menulink.toggleClass('active');
+                $menu.toggleClass('active');
+                return false;
+            });
+
+
+            var winHeight = $(window).height(),
+                docHeight = $(document).height(),
+                progressBar = $('progress'),
+                max, value;
+
+            /* Set the max scrollable area */
+            max = docHeight - winHeight;
+            progressBar.attr('max', max);
+
+            $(document).on('scroll', function() {
+                value = $(window).scrollTop();
+                progressBar.attr('value', value);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

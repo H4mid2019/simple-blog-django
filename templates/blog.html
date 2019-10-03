@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Example-Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="https://darabi.website/static/blog.css" />
+  </head>
+  <body>
+    <!-- partial:index.partial.html -->
+{% for post in posts %}
+{% if forloop.counter|divisibleby:2  %}
+
+    <div class="blog-card">
+      <div class="meta">
+        <div
+          class="photo"
+          style="background-image: url({{ post.imag.url }})"
+        ></div>
+        <ul class="details">
+          <li class="author">
+            <a href="#">{{ post.author }}</a>
+          </li>
+          <li class="date">{{ post.date_added }}</li>
+          <li class="tags">
+            <ul>
+              {% for t in post.taglist %}
+
+              <li><a href="#">{{ t }}</a></li>
+              
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="description">
+        <h1>{{ post.title }}</h1>
+        <h2>{{ post.subtitle }}</h2>
+        <p>{{ post.brief }}</p>
+        <p class="read-more">
+          <a href="{% url 'blog:detail' post.slug %}">Read More</a>
+        </p>
+      </div>
+    </div>
+{% else %}
+    <div class="blog-card alt">
+      <div class="meta">
+        <div
+          class="photo"
+          style="background-image: url({{ post.imag.url }})"
+        ></div>
+        <ul class="details">
+          <li class="author"><a href="#">{{ post.author }}</a></li>
+          <li class="date">{{ post.date_added }}</li>
+          <li class="tags">
+            <ul>
+              {% for t in post.taglist %}
+
+              <li><a href="#">{{ t }}</a></li>
+              
+              {% endfor %}
+            
+            
+              <!-- <li><a href="#">Code</a></li>
+              <li><a href="#">HTML</a></li>
+              <li><a href="#">CSS</a></li> -->
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="description">
+        <h1>{{ post.title }}</h1>
+        <h2>{{ post.subtitle }}</h2>
+        <p>{{ post.brief }}</p>
+        <p class="read-more">
+          <a href="{% url 'blog:detail' post.slug %}">Read More</a>
+        </p>
+      </div>
+    </div>
+{% endif %}
+{% endfor %}
+    <!-- partial -->
+  </body>
+</html>
