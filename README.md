@@ -2,6 +2,12 @@
 This is a very simple blog but it's functional and of course it will be the example for Django developer.
 It's semi-CMS. I think It's useful for testers or Devlopers.
 
+<p>The default username and password is:</p>
+<pre>
+user: hamid
+pass: 12345
+
+
 **The "first" folder is the main project folder. 
 
 **Don't forgot to create superuser. Commands to do this:
