@@ -5,16 +5,11 @@ import re
 # Create your models here.
 
 
-ee = validators.ValidationError
-
-
 def validator(self):
-    global ee
     if re.match(r"(\d{1,3}),(\d{1,3}),(\d{1,3})", self):
         return True
     else:
-        raise ee(
-            message="Please,enter correct rgb color. Example: '255,255,255' for white.")
+        raise eevalidators.ValidationError(message="Please,enter correct rgb color. Example: '255,255,255' for white.")
 
 
 class Home(models.Model):
