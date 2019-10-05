@@ -20,13 +20,11 @@ python3 manag.py createsuperuser
 python manage.py createsuperuser
 </pre>
 
-just run appropriate commands and start your webserver:
+Commands to start your webserver:
 
 <p>In linux :</p>
 <pre>
 <code>
-python3 manage.py makemigrations
-python3 manage.py migrate
 python3 manage.py runserver
 </code>
 </pre>
@@ -34,7 +32,5 @@ python3 manage.py runserver
 <p>In windows:</p>
 <pre>
 <code>
-python manage.py makemigrations
-python manage.py migrate
 python manage.py runserver
   
