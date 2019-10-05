@@ -8,7 +8,7 @@ It's semi-CMS. I think It's useful for testers or Devlopers.
 
 <pre>
 python3 manag.py createsuperuser
-<pre>
+</pre>
 <p>Or in windows</p>
 <pre>
 python manage.py createsuperuser
