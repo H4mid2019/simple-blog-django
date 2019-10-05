@@ -11,7 +11,7 @@ pass: 12345
 **The "first" folder is the main project folder. 
 
 **Don't forgot to create superuser. Commands to do this:
-
+<p>In Linux and Mac </p>
 <pre>
 python3 manag.py createsuperuser
 </pre>
