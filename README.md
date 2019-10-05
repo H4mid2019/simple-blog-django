@@ -4,6 +4,16 @@ It's semi-CMS. I think It's useful for testers or Devlopers.
 
 **The "first" folder is the main project folder. 
 
+**Don't forgot to create superuser. Commands to do this:
+
+<pre>
+python3 manag.py createsuperuser
+<pre>
+<p>Or in windows</p>
+<pre>
+python manage.py createsuperuser
+</pre>
+
 just run appropriate commands and start your webserver:
 
 <p>In linux :</p>
