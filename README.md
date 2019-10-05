@@ -1,6 +1,6 @@
 # simple-blog-Django
 This is a very simple blog but it's functional and ofcourse it will be the example for Django developer.
-It's semi-CMS. I think It's useful for testers or Developers.
+It's semi-CMS. I think It's useful for testers or developers.
 
 <p>The default username and password is:</p>
 <pre>
