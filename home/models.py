@@ -9,7 +9,7 @@ def validator(self):
     if re.match(r"(\d{1,3}),(\d{1,3}),(\d{1,3})", self):
         return True
     else:
-        raise eevalidators.ValidationError(message="Please,enter correct rgb color. Example: '255,255,255' for white.")
+        raise validators.ValidationError(message="Please,enter correct rgb color. Example: '255,255,255' for white.")
 
 
 class Home(models.Model):
